@@ -19,7 +19,7 @@ console.log('Extracting frames from Nissan Silvi Transition video...');
 try {
   execFileSync(ffmpegPath, [
     '-i', inputVideo,
-    '-vf', 'fps=60',
+    '-vf', 'minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1,scale=1920:1080',
     '-c:v', 'libwebp',
     '-q:v', '90',
     path.join(outputDir, 'frame-%04d.webp')

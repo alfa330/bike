@@ -24,7 +24,7 @@ gsap.registerPlugin(ScrollTrigger);
    Nissan Data
    ───────────────────────────────────────────── */
 
-const NISSAN_FRAME_COUNT = 303;
+const NISSAN_FRAME_COUNT = 298;
 const AUTO_PLAY_IDLE_MS = 5000;
 const AUTO_PLAY_SPEED = 0.4;
 

@@ -26,7 +26,7 @@ gsap.registerPlugin(ScrollTrigger);
    Data
    ───────────────────────────────────────────── */
 
-const FRAME_COUNT = 303;
+const FRAME_COUNT = 298;
 const AUTO_PLAY_IDLE_MS = 5000;
 const AUTO_PLAY_SPEED = 0.4; // px per frame at 60fps
 

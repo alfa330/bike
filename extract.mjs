@@ -19,9 +19,9 @@ console.log('Extracting frames from video at MAX quality and 60 FPS...');
 try {
   execFileSync(ffmpegPath, [
     '-i', inputVideo,
-    '-vf', 'fps=60', // Force 60 fps for ultra smoothness, keep native 4K resolution
+    '-vf', 'minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1,scale=1920:1080',
     '-c:v', 'libwebp',
-    '-q:v', '90', // Higher quality (90 instead of 70)
+    '-q:v', '90',
     path.join(outputDir, 'frame-%04d.webp')
   ], { stdio: 'inherit' });
 
