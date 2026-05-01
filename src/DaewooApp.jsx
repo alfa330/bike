@@ -169,7 +169,17 @@ function DaewooLoadingScreen({ progress }) {
 function DaewooHero() {
   return (
     <section className="hero-section daewoo-hero">
-      <div className="daewoo-hero-bg" />
+      <div className="daewoo-hero-video-wrap">
+        <video
+          className="daewoo-hero-video"
+          src="/Nexia_start.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+        <div className="daewoo-hero-video-overlay" />
+      </div>
 
       <motion.div
         className="hero-content"
@@ -524,7 +534,17 @@ function DaewooScrollExperience({ setLoadProgress, lenisRef }) {
 function DaewooAfterSection() {
   return (
     <section className="after-section daewoo-after">
-      <div className="daewoo-after-bg" />
+      <div className="daewoo-end-video-wrap">
+        <video
+          className="daewoo-end-video"
+          src="/Nexia_end.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+        <div className="daewoo-end-video-overlay" />
+      </div>
 
       <motion.div
         className="after-card daewoo-after-card"

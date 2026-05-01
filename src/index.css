@@ -1504,15 +1504,26 @@ button {
   position: relative;
 }
 
-.daewoo-hero-bg {
+.daewoo-hero-video-wrap {
   position: absolute;
   inset: 0;
   z-index: 0;
+  overflow: hidden;
+}
+
+.daewoo-hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.6) contrast(1.1) brightness(0.7);
+}
+
+.daewoo-hero-video-overlay {
+  position: absolute;
+  inset: 0;
   background:
-    radial-gradient(ellipse 90% 60% at 50% 40%, rgba(40, 60, 75, 0.2), transparent),
-    radial-gradient(circle at 20% 80%, rgba(50, 70, 85, 0.12), transparent 500px),
-    radial-gradient(circle at 80% 20%, rgba(30, 50, 65, 0.08), transparent 400px),
-    linear-gradient(180deg, #0a0f12 0%, #0d1418 40%, #0a0f12 100%);
+    linear-gradient(180deg, rgba(10, 15, 18, 0.3) 0%, rgba(10, 15, 18, 0.1) 40%, rgba(10, 15, 18, 0.7) 100%),
+    radial-gradient(ellipse 80% 60% at 50% 40%, transparent 30%, rgba(10, 15, 18, 0.4));
 }
 
 .daewoo-hero .hero-content h1 {
@@ -1595,14 +1606,26 @@ button {
   background: none !important;
 }
 
-.daewoo-after-bg {
+.daewoo-end-video-wrap {
   position: absolute;
   inset: 0;
   z-index: 0;
+  overflow: hidden;
+}
+
+.daewoo-end-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.5) contrast(1.05) brightness(0.45);
+}
+
+.daewoo-end-video-overlay {
+  position: absolute;
+  inset: 0;
   background:
-    radial-gradient(ellipse 80% 50% at 50% 60%, rgba(40, 60, 75, 0.15), transparent),
-    radial-gradient(circle at 70% 30%, rgba(50, 70, 85, 0.08), transparent 500px),
-    linear-gradient(180deg, #0d1418, #0a0f12);
+    linear-gradient(180deg, rgba(10, 15, 18, 0.6) 0%, rgba(10, 15, 18, 0.3) 40%, rgba(10, 15, 18, 0.8) 100%),
+    radial-gradient(ellipse 70% 50% at 50% 50%, transparent 20%, rgba(10, 15, 18, 0.5));
 }
 
 .daewoo-after-card {
