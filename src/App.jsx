@@ -120,13 +120,14 @@ function HondaApp({ onBack }) {
 
   // Initialize Lenis smooth scroll
   useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
     const lenis = new Lenis({
-      duration: 1.4,
+      duration: isMobile ? 1.0 : 1.4,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      touchMultiplier: 1.5,
+      touchMultiplier: isMobile ? 2 : 1.5,
     });
 
     lenisRef.current = lenis;
@@ -374,8 +375,8 @@ function BikeScrollExperience({ setLoadProgress, lenisRef }) {
     const trigger = ScrollTrigger.create({
       trigger: section,
       start: "top top",
-      end: () => `+=${window.innerHeight * 4}`,
-      scrub: 0.8, // tighter scrub for more responsive feel
+      end: () => `+=${window.innerHeight * (window.innerWidth <= 768 ? 3 : 4)}`,
+      scrub: window.innerWidth <= 768 ? 0.5 : 0.8,
       pin: true,
       anticipatePin: 1,
       invalidateOnRefresh: true,

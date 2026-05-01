@@ -682,6 +682,8 @@ button {
 }
 
 /* --- Responsive --- */
+
+/* Tablet / landscape phones */
 @media (max-width: 980px) {
   .stage-overlay {
     justify-content: center;
@@ -705,36 +707,310 @@ button {
     top: 1rem;
     right: 1rem;
   }
+
+  .after-section {
+    padding: 5rem 1.25rem;
+  }
 }
 
+/* Phones */
 @media (max-width: 560px) {
   .hero-section {
-    padding-top: 4rem;
+    padding: 3rem 1rem 4rem;
+    min-height: 100svh;
   }
 
   .hero-content h1 {
-    font-size: clamp(2.8rem, 16vw, 4.5rem);
+    font-size: clamp(2.8rem, 14vw, 4.5rem);
+  }
+
+  .hero-subtitle {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .hero-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-top: 0.8rem;
+  }
+
+  .hero-brand-line {
+    width: 20px;
+  }
+
+  .hero-brand-text {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+  }
+
+  .hero-actions {
+    margin-top: 2rem;
+    gap: 1rem;
+  }
+
+  .primary-btn {
+    height: 2.8rem;
+    padding: 0 1.5rem;
+    font-size: 0.88rem;
+  }
+
+  .scroll-hint {
+    font-size: 0.8rem;
+  }
+
+  .stage-overlay {
+    padding: 0.75rem;
+    padding-bottom: env(safe-area-inset-bottom, 0.75rem);
+  }
+
+  .copy-panel {
+    gap: 0.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .panel-topline {
+    font-size: 0.68rem;
+  }
+
+  .story-card {
+    padding: 1rem;
+    border-radius: 1.25rem;
   }
 
   .story-card h2 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .story-card p {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin-top: 0.5rem;
+  }
+
+  .story-kicker {
+    font-size: 0.7rem;
+  }
+
+  .metric-row {
+    margin-top: 0.8rem;
+    gap: 0.6rem;
   }
 
   .metric-row strong {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
+  }
+
+  .metric-row span {
+    font-size: 0.72rem;
+  }
+
+  .step-dots {
+    margin-top: 0.4rem;
+  }
+
+  .dot {
+    width: 1.5rem;
+    height: 2px;
+  }
+
+  .dot.active {
+    width: 2rem;
   }
 
   .spec-grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .spec-card {
+    min-height: 110px;
+    padding: 1rem;
+  }
+
+  .after-section {
+    padding: 4rem 1rem;
+    min-height: auto;
+  }
+
+  .after-card {
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+  }
+
+  .after-card h2 {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+
+  .after-card p {
+    font-size: 0.9rem;
+  }
+
+  .after-label {
+    font-size: 0.72rem;
   }
 
   .cta-row {
     flex-direction: column;
+    margin-top: 1.5rem;
   }
 
   .cta-btn {
     width: 100%;
     justify-content: center;
+    height: 2.8rem;
+    font-size: 0.88rem;
+  }
+
+  .back-to-selector {
+    top: 0.75rem;
+    left: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.72rem;
+  }
+
+  .autoplay-badge {
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.68rem;
+  }
+
+  .loading-bar-bg {
+    width: min(260px, 70vw);
+  }
+
+  .loading-content h2 {
+    font-size: 0.8rem;
+  }
+
+  .video-glow-fullscreen {
+    width: 70vw;
+    filter: blur(40px);
+  }
+}
+
+/* Small phones (SE, mini, etc.) */
+@media (max-width: 390px) {
+  .hero-section {
+    padding: 2.5rem 0.75rem 3rem;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2.2rem, 13vw, 3.5rem);
+  }
+
+  .hero-desc {
+    font-size: 0.85rem;
+  }
+
+  .story-card h2 {
+    font-size: 1.3rem;
+  }
+
+  .story-card p {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .metric-row strong {
+    font-size: 1.8rem;
+  }
+
+  .after-card h2 {
+    font-size: 1.6rem;
+  }
+
+  .spec-card {
+    min-height: 95px;
+  }
+
+  .spec-card strong {
+    font-size: 0.92rem;
+  }
+
+  .selector-card {
+    min-height: 240px;
+  }
+
+  .selector-card-name {
+    font-size: 1.6rem;
+  }
+
+  .selector-card-desc {
+    font-size: 0.85rem;
+  }
+
+  .selector-card-btn {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.78rem;
+  }
+}
+
+/* Touch devices — disable hover effects */
+@media (hover: none) and (pointer: coarse) {
+  .spec-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .primary-btn:hover {
+    transform: none;
+  }
+
+  .cta-btn-primary:hover {
+    transform: none;
+  }
+
+  .selector-card:hover {
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+  }
+
+  .back-to-selector:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Use 100svh for mobile browsers with dynamic toolbars */
+@supports (height: 100svh) {
+  .hero-section {
+    min-height: 100svh;
+  }
+
+  .bike-stage {
+    height: 100svh;
+  }
+
+  .selector-screen {
+    min-height: 100svh;
+  }
+
+  .loading-screen {
+    min-height: 100svh;
+  }
+}
+
+/* Safe area insets for notched phones */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .copy-panel {
+    padding-bottom: calc(clamp(2rem, 4vh, 4rem) + env(safe-area-inset-bottom));
+  }
+
+  .back-to-selector {
+    top: calc(clamp(1rem, 2vw, 1.5rem) + env(safe-area-inset-top));
+    left: calc(clamp(1rem, 2vw, 1.5rem) + env(safe-area-inset-left));
+  }
+
+  .autoplay-badge {
+    top: calc(clamp(1.5rem, 3vw, 3rem) + env(safe-area-inset-top));
+  }
+
+  .after-section {
+    padding-bottom: calc(7rem + env(safe-area-inset-bottom));
   }
 }
 
@@ -1215,15 +1491,84 @@ button {
 }
 
 @media (max-width: 560px) {
-  .selector-card {
-    min-height: 300px;
+  .selector-screen {
+    min-height: 100svh;
+    padding: 0;
   }
 
-  .selector-card-name {
-    font-size: 2rem;
+  .selector-content {
+    width: 100%;
+    padding: 2rem 1rem;
   }
 
   .selector-title {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 10vw, 2.5rem);
+  }
+
+  .selector-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .selector-cards {
+    gap: 1rem;
+  }
+
+  .selector-card {
+    min-height: 280px;
+  }
+
+  .selector-card-name {
+    font-size: 1.8rem;
+  }
+
+  .selector-card-desc {
+    font-size: 0.88rem;
+    max-width: none;
+  }
+
+  .selector-card-content {
+    padding: 1.25rem;
+  }
+
+  .selector-card-brand {
+    font-size: 0.65rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .selector-card-cta {
+    margin-top: 1rem;
+  }
+
+  .selector-vs {
+    width: 36px;
+    height: 36px;
+    font-size: 0.65rem;
+  }
+
+  .selector-divider {
+    margin: -0.25rem 0;
+  }
+}
+
+/* ========================================================
+   Nissan Responsive Overrides
+   ======================================================== */
+
+@media (max-width: 560px) {
+  .nissan-hero-video {
+    filter: grayscale(0.4) contrast(1.05);
+  }
+
+  .nissan-end-video {
+    filter: grayscale(0.3) contrast(1.05) brightness(0.4);
+  }
+
+  .nissan-after {
+    min-height: auto !important;
+  }
+
+  .nissan-after-card {
+    padding: 1.5rem !important;
   }
 }
