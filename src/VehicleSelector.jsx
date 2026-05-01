@@ -1,15 +1,60 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef, useState, useCallback } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Sparkles } from "lucide-react";
+
+const VIDEO_SOURCES = [
+  "/bike-scrub.mp4",
+  "/Nissan_silvi_start.mp4",
+  "/Daewoo Nexia II.mp4",
+];
 
 export default function VehicleSelector({ onSelect }) {
+  const [readyCount, setReadyCount] = useState(0);
+  const readySet = useRef(new Set());
+
+  const handleVideoReady = useCallback((src) => {
+    if (readySet.current.has(src)) return;
+    readySet.current.add(src);
+    setReadyCount(readySet.current.size);
+  }, []);
+
+  const allReady = readyCount >= VIDEO_SOURCES.length;
+  const progress = Math.round((readyCount / VIDEO_SOURCES.length) * 100);
+
   return (
     <div className="selector-screen">
       <div className="selector-bg-noise" />
 
+      {/* Loading overlay */}
+      <AnimatePresence>
+        {!allReady && (
+          <motion.div
+            className="loading-screen selector-loading"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+          >
+            <div className="loading-content">
+              <div className="loading-logo">
+                <Sparkles size={28} />
+              </div>
+              <h2>Загрузка</h2>
+              <div className="loading-bar-bg">
+                <div
+                  className="loading-bar-fill"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+              <span className="loading-text">{progress}%</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <motion.div
         className="selector-content"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: allReady ? 1 : 0 }}
         transition={{ duration: 1, delay: 0.2 }}
       >
         <motion.h1
@@ -48,6 +93,7 @@ export default function VehicleSelector({ onSelect }) {
                 muted
                 playsInline
                 className="selector-card-video"
+                onCanPlayThrough={() => handleVideoReady("/bike-scrub.mp4")}
               />
               <div className="selector-card-overlay" />
             </div>
@@ -85,6 +131,7 @@ export default function VehicleSelector({ onSelect }) {
                 muted
                 playsInline
                 className="selector-card-video"
+                onCanPlayThrough={() => handleVideoReady("/Nissan_silvi_start.mp4")}
               />
               <div className="selector-card-overlay nissan-overlay" />
             </div>
@@ -122,6 +169,7 @@ export default function VehicleSelector({ onSelect }) {
                 muted
                 playsInline
                 className="selector-card-video"
+                onCanPlayThrough={() => handleVideoReady("/Daewoo Nexia II.mp4")}
               />
               <div className="selector-card-overlay daewoo-overlay" />
             </div>
