@@ -17,6 +17,8 @@ import {
   Wind,
   Zap,
 } from "lucide-react";
+import VehicleSelector from "./VehicleSelector";
+import NissanApp from "./NissanApp";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -85,10 +87,34 @@ const particles = Array.from({ length: 18 }, (_, i) => ({
 }));
 
 /* ─────────────────────────────────────────────
-   App Root
+   App Root — Vehicle Selection Router
    ───────────────────────────────────────────── */
 
 export default function App() {
+  const [vehicle, setVehicle] = useState(null); // null = selector, "honda" or "nissan"
+
+  const handleBack = useCallback(() => {
+    window.scrollTo(0, 0);
+    ScrollTrigger.getAll().forEach((t) => t.kill());
+    setVehicle(null);
+  }, []);
+
+  if (vehicle === null) {
+    return <VehicleSelector onSelect={setVehicle} />;
+  }
+
+  if (vehicle === "nissan") {
+    return <NissanApp onBack={handleBack} />;
+  }
+
+  return <HondaApp onBack={handleBack} />;
+}
+
+/* ─────────────────────────────────────────────
+   Honda App (original flow)
+   ───────────────────────────────────────────── */
+
+function HondaApp({ onBack }) {
   const [loadProgress, setLoadProgress] = useState(0);
   const lenisRef = useRef(null);
 
@@ -122,6 +148,9 @@ export default function App() {
   return (
     <main className="site-shell">
       <LoadingScreen progress={loadProgress} />
+      <button className="back-to-selector" onClick={onBack}>
+        ← Назад к выбору
+      </button>
       <Hero />
       <BikeScrollExperience setLoadProgress={setLoadProgress} lenisRef={lenisRef} />
       <AfterSection />
