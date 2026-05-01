@@ -19,9 +19,9 @@ console.log('Extracting frames from Nissan Silvi Transition video...');
 try {
   execFileSync(ffmpegPath, [
     '-i', inputVideo,
-    '-vf', 'fps=30',
+    '-vf', 'fps=60',
     '-c:v', 'libwebp',
-    '-q:v', '85',
+    '-q:v', '90',
     path.join(outputDir, 'frame-%04d.webp')
   ], { stdio: 'inherit' });
 

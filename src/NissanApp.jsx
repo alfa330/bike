@@ -24,7 +24,7 @@ gsap.registerPlugin(ScrollTrigger);
    Nissan Data
    ───────────────────────────────────────────── */
 
-const NISSAN_FRAME_COUNT = 151;
+const NISSAN_FRAME_COUNT = 303;
 const AUTO_PLAY_IDLE_MS = 5000;
 const AUTO_PLAY_SPEED = 0.4;
 
@@ -164,14 +164,25 @@ function NissanLoadingScreen({ progress }) {
    ───────────────────────────────────────────── */
 
 function NissanHero() {
+  const videoRef = useRef(null);
+  const [blurred, setBlurred] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const onEnded = () => setBlurred(true);
+    video.addEventListener("ended", onEnded);
+    return () => video.removeEventListener("ended", onEnded);
+  }, []);
+
   return (
     <section className="hero-section nissan-hero">
       <div className="nissan-hero-video-wrap">
         <video
-          className="nissan-hero-video"
+          ref={videoRef}
+          className={`nissan-hero-video${blurred ? " nissan-hero-video-blurred" : ""}`}
           src="/Nissan_silvi_start.mp4"
           autoPlay
-          loop
           muted
           playsInline
         />
@@ -529,14 +540,31 @@ function NissanScrollExperience({ setLoadProgress, lenisRef }) {
    ───────────────────────────────────────────── */
 
 function NissanAfterSection() {
+  const endVideoRef = useRef(null);
+
+  useEffect(() => {
+    const video = endVideoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.currentTime = 0;
+          video.play().catch(() => {});
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="after-section nissan-after">
       <div className="nissan-end-video-wrap">
         <video
+          ref={endVideoRef}
           className="nissan-end-video"
           src="/Nissan_silvi_end.mp4"
-          autoPlay
-          loop
           muted
           playsInline
         />
