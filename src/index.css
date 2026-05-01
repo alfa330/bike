@@ -1006,11 +1006,6 @@ button {
   height: 100%;
   object-fit: cover;
   filter: grayscale(0.6) contrast(1.1);
-  transition: filter 1.5s ease-in-out;
-}
-
-.nissan-hero-video-blurred {
-  filter: grayscale(0.6) contrast(1.1) blur(20px) brightness(0.6);
 }
 
 .nissan-hero-video-overlay {
