@@ -1467,6 +1467,241 @@ button {
 }
 
 /* ========================================================
+   Daewoo Theme — Wet Asphalt / Dark
+   ======================================================== */
+
+.daewoo-theme {
+  --accent: #5a7a8a;
+  --accent-bright: #7a9aaa;
+  --accent-glow: rgba(90, 122, 138, 0.12);
+  --accent-glow-strong: rgba(90, 122, 138, 0.3);
+}
+
+/* Daewoo selector card */
+.daewoo-accent-text {
+  color: #7a9aaa;
+}
+
+.daewoo-overlay {
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(20, 30, 35, 0.45) 50%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+.daewoo-btn-accent {
+  background: rgba(90, 122, 138, 0.2);
+  color: #c0d0d8;
+  border: 1px solid rgba(90, 122, 138, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.daewoo-select-card:hover .daewoo-btn-accent {
+  background: #5a7a8a;
+  color: #fff;
+}
+
+/* Daewoo Hero */
+.daewoo-hero {
+  position: relative;
+}
+
+.daewoo-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 40%, rgba(40, 60, 75, 0.2), transparent),
+    radial-gradient(circle at 20% 80%, rgba(50, 70, 85, 0.12), transparent 500px),
+    radial-gradient(circle at 80% 20%, rgba(30, 50, 65, 0.08), transparent 400px),
+    linear-gradient(180deg, #0a0f12 0%, #0d1418 40%, #0a0f12 100%);
+}
+
+.daewoo-hero .hero-content h1 {
+  background: linear-gradient(180deg, #d0dce2 20%, rgba(90, 122, 138, 0.5));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.daewoo-accent {
+  color: #7a9aaa !important;
+  -webkit-text-fill-color: #7a9aaa !important;
+}
+
+.daewoo-line {
+  background: #5a7a8a !important;
+  box-shadow: 0 0 8px rgba(90, 122, 138, 0.35) !important;
+}
+
+.daewoo-btn {
+  background: rgba(90, 122, 138, 0.15) !important;
+  border: 1px solid rgba(90, 122, 138, 0.3) !important;
+  box-shadow: 0 0 30px rgba(90, 122, 138, 0.1), 0 12px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+.daewoo-btn:hover {
+  background: rgba(90, 122, 138, 0.25) !important;
+  box-shadow: 0 0 50px rgba(90, 122, 138, 0.15), 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Daewoo Loading */
+.daewoo-loading {
+  background: #0a0f12;
+}
+
+.daewoo-logo-pulse {
+  color: #5a7a8a !important;
+}
+
+.daewoo-bar {
+  background: linear-gradient(90deg, #3a5a6a, #7a9aaa) !important;
+  box-shadow: 0 0 12px rgba(90, 122, 138, 0.35) !important;
+}
+
+/* Daewoo Stage */
+.daewoo-glow {
+  background: radial-gradient(circle, rgba(90, 122, 138, 0.1), transparent 70%) !important;
+}
+
+.daewoo-particle {
+  background: #5a7a8a !important;
+}
+
+.daewoo-pulse {
+  background: #7a9aaa !important;
+}
+
+/* Daewoo Story Card */
+.daewoo-card::before {
+  background: linear-gradient(90deg, transparent, rgba(90, 122, 138, 0.2), transparent) !important;
+}
+
+.daewoo-kicker {
+  color: #7a9aaa !important;
+}
+
+.daewoo-dot-active {
+  background: #5a7a8a !important;
+  box-shadow: 0 0 16px rgba(90, 122, 138, 0.35) !important;
+}
+
+/* Daewoo After Section */
+.daewoo-after {
+  position: relative;
+  background: #0a0f12 !important;
+  color: #d0dce2 !important;
+}
+
+.daewoo-after::before {
+  background: none !important;
+}
+
+.daewoo-after-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 60%, rgba(40, 60, 75, 0.15), transparent),
+    radial-gradient(circle at 70% 30%, rgba(50, 70, 85, 0.08), transparent 500px),
+    linear-gradient(180deg, #0d1418, #0a0f12);
+}
+
+.daewoo-after-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(13, 20, 24, 0.8) !important;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(90, 122, 138, 0.12) !important;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5) !important;
+}
+
+.daewoo-after-card h2 {
+  color: #d0dce2 !important;
+}
+
+.daewoo-after-card p {
+  color: rgba(208, 220, 226, 0.5) !important;
+}
+
+.daewoo-after-label {
+  color: #7a9aaa !important;
+}
+
+.daewoo-spec {
+  background: rgba(90, 122, 138, 0.08) !important;
+  border: 1px solid rgba(90, 122, 138, 0.12) !important;
+}
+
+.daewoo-spec:hover {
+  background: rgba(90, 122, 138, 0.15) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+.daewoo-spec span {
+  color: rgba(208, 220, 226, 0.4) !important;
+}
+
+.daewoo-spec strong {
+  color: #d0dce2 !important;
+}
+
+.daewoo-spec-icon {
+  color: #5a7a8a !important;
+}
+
+.daewoo-cta-primary {
+  background: rgba(90, 122, 138, 0.2) !important;
+  color: #d0dce2 !important;
+  border: 1px solid rgba(90, 122, 138, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+.daewoo-cta-primary:hover {
+  background: #5a7a8a !important;
+  color: #fff !important;
+  box-shadow: 0 12px 40px rgba(90, 122, 138, 0.2) !important;
+}
+
+.daewoo-cta-secondary {
+  color: rgba(208, 220, 226, 0.5) !important;
+  border: 1.5px solid rgba(90, 122, 138, 0.2) !important;
+}
+
+.daewoo-cta-secondary:hover {
+  border-color: #5a7a8a !important;
+  color: #d0dce2 !important;
+}
+
+/* ========================================================
+   Selector 3-Column Layout
+   ======================================================== */
+
+.selector-cards-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.selector-cards-3 .selector-card {
+  max-width: none;
+  min-height: 440px;
+}
+
+@media (max-width: 1100px) {
+  .selector-cards-3 {
+    grid-template-columns: 1fr;
+    max-width: 560px;
+    gap: 1rem;
+  }
+
+  .selector-cards-3 .selector-card {
+    min-height: 340px;
+  }
+}
+
+/* ========================================================
    Selector Responsive
    ======================================================== */
 

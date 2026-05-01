@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import VehicleSelector from "./VehicleSelector";
 import NissanApp from "./NissanApp";
+import DaewooApp from "./DaewooApp";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -105,6 +106,10 @@ export default function App() {
 
   if (vehicle === "nissan") {
     return <NissanApp onBack={handleBack} />;
+  }
+
+  if (vehicle === "daewoo") {
+    return <DaewooApp onBack={handleBack} />;
   }
 
   return <HondaApp onBack={handleBack} />;

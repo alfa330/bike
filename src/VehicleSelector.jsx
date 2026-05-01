@@ -26,17 +26,17 @@ export default function VehicleSelector({ onSelect }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          Два мира. Одна страсть к скорости.
+          Три мира. Одна страсть к машинам.
         </motion.p>
 
-        <div className="selector-cards">
+        <div className="selector-cards selector-cards-3">
           {/* Honda Card */}
           <motion.button
             className="selector-card honda-select-card"
             onClick={() => onSelect("honda")}
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -67,23 +67,13 @@ export default function VehicleSelector({ onSelect }) {
             </div>
           </motion.button>
 
-          {/* Divider */}
-          <motion.div
-            className="selector-divider"
-            initial={{ opacity: 0, scaleY: 0 }}
-            animate={{ opacity: 1, scaleY: 1 }}
-            transition={{ duration: 0.6, delay: 1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <span className="selector-vs">VS</span>
-          </motion.div>
-
           {/* Nissan Card */}
           <motion.button
             className="selector-card nissan-select-card"
             onClick={() => onSelect("nissan")}
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -110,6 +100,43 @@ export default function VehicleSelector({ onSelect }) {
               </p>
               <div className="selector-card-cta">
                 <span className="selector-card-btn nissan-btn-accent">Открыть</span>
+              </div>
+            </div>
+          </motion.button>
+
+          {/* Daewoo Card */}
+          <motion.button
+            className="selector-card daewoo-select-card"
+            onClick={() => onSelect("daewoo")}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <div className="selector-card-bg daewoo-card-bg">
+              <video
+                src="/Daewoo Nexia II.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="selector-card-video"
+              />
+              <div className="selector-card-overlay daewoo-overlay" />
+            </div>
+            <div className="selector-card-content">
+              <span className="selector-card-brand">Daewoo Motors</span>
+              <h2 className="selector-card-name">
+                Nexia II
+                <br />
+                <span className="daewoo-accent-text">Надёжность</span>
+              </h2>
+              <p className="selector-card-desc">
+                1.5L SOHC. 85 л.с. Народный автомобиль.
+              </p>
+              <div className="selector-card-cta">
+                <span className="selector-card-btn daewoo-btn-accent">Открыть</span>
               </div>
             </div>
           </motion.button>
