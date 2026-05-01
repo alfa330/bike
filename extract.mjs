@@ -1,0 +1,32 @@
+import ffmpegPath from 'ffmpeg-static';
+import { execFileSync } from 'child_process';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const inputVideo = path.join(__dirname, 'public', 'bike-rotation.mp4');
+const outputDir = path.join(__dirname, 'public', 'frames');
+
+if (fs.existsSync(outputDir)) {
+  fs.rmSync(outputDir, { recursive: true, force: true });
+}
+fs.mkdirSync(outputDir, { recursive: true });
+
+console.log('Extracting frames from video at MAX quality and 60 FPS...');
+try {
+  execFileSync(ffmpegPath, [
+    '-i', inputVideo,
+    '-vf', 'fps=60', // Force 60 fps for ultra smoothness, keep native 4K resolution
+    '-c:v', 'libwebp',
+    '-q:v', '90', // Higher quality (90 instead of 70)
+    path.join(outputDir, 'frame-%04d.webp')
+  ], { stdio: 'inherit' });
+
+  const files = fs.readdirSync(outputDir).filter(f => f.endsWith('.webp'));
+  console.log(`Extraction complete. ${files.length} frames generated.`);
+} catch (error) {
+  console.error('Error extracting frames:', error);
+}
