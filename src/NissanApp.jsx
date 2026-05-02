@@ -164,6 +164,28 @@ function NissanLoadingScreen({ progress }) {
    Hero — full-screen video background
    ───────────────────────────────────────────── */
 
+function LazyVideo({ className, src, ...props }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.src = src;
+          el.load();
+          el.play().catch(() => {});
+          io.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [src]);
+  return <video ref={ref} className={className} preload="none" loop muted playsInline {...props} />;
+}
+
 function NissanHero() {
   return (
     <section className="hero-section nissan-hero">
@@ -239,10 +261,12 @@ function NissanScrollExperience({ setLoadProgress, lenisRef }) {
   const activeFrame = nissanFrames[activeIndex];
   const ActiveIcon = activeFrame.icon;
 
-  // ── Preload frames ──
+  // ── Preload frames in batches ──
   useLayoutEffect(() => {
-    const images = [];
+    const images = new Array(NISSAN_FRAME_COUNT);
     let loadedCount = 0;
+    let cancelled = false;
+    const BATCH = 8;
 
     const onReady = () => {
       loadedCount++;
@@ -250,13 +274,23 @@ function NissanScrollExperience({ setLoadProgress, lenisRef }) {
       setLoadProgress(pct);
     };
 
-    for (let i = 1; i <= NISSAN_FRAME_COUNT; i++) {
-      const img = new Image();
-      img.src = `/nissan-frames/frame-${String(i).padStart(4, "0")}.webp`;
-      img.decode().then(onReady).catch(onReady);
-      images.push(img);
+    async function loadBatches() {
+      for (let b = 0; b < NISSAN_FRAME_COUNT && !cancelled; b += BATCH) {
+        const batch = [];
+        for (let i = b; i < Math.min(b + BATCH, NISSAN_FRAME_COUNT); i++) {
+          const img = new Image();
+          img.src = `/nissan-frames/frame-${String(i + 1).padStart(4, "0")}.webp`;
+          images[i] = img;
+          batch.push(img.decode().then(onReady).catch(onReady));
+        }
+        await Promise.all(batch);
+      }
     }
+
     imagesRef.current = images;
+    loadBatches();
+
+    return () => { cancelled = true; };
   }, [setLoadProgress]);
 
   // ── Canvas + ScrollTrigger ──
@@ -533,13 +567,9 @@ function NissanAfterSection() {
   return (
     <section className="after-section nissan-after">
       <div className="nissan-end-video-wrap">
-        <video
+        <LazyVideo
           className="nissan-end-video"
           src="/Nissan_silvi_end.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
         />
         <div className="nissan-end-video-overlay" />
       </div>

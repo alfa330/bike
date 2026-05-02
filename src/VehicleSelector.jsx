@@ -92,6 +92,7 @@ export default function VehicleSelector({ onSelect }) {
                 loop
                 muted
                 playsInline
+                preload="metadata"
                 className="selector-card-video"
                 onCanPlayThrough={() => handleVideoReady("/bike-scrub.mp4")}
               />
@@ -130,6 +131,7 @@ export default function VehicleSelector({ onSelect }) {
                 loop
                 muted
                 playsInline
+                preload="metadata"
                 className="selector-card-video"
                 onCanPlayThrough={() => handleVideoReady("/Nissan_silvi_start.mp4")}
               />
@@ -168,6 +170,7 @@ export default function VehicleSelector({ onSelect }) {
                 loop
                 muted
                 playsInline
+                preload="metadata"
                 className="selector-card-video"
                 onCanPlayThrough={() => handleVideoReady("/Daewoo Nexia II.mp4")}
               />

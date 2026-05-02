@@ -266,10 +266,12 @@ function BikeScrollExperience({ setLoadProgress, lenisRef }) {
   const activeFrame = frames[activeIndex];
   const ActiveIcon = activeFrame.icon;
 
-  // ── Preload frames ──
+  // ── Preload frames in batches ──
   useLayoutEffect(() => {
-    const images = [];
+    const images = new Array(FRAME_COUNT);
     let loadedCount = 0;
+    let cancelled = false;
+    const BATCH = 8;
 
     const onReady = () => {
       loadedCount++;
@@ -277,13 +279,23 @@ function BikeScrollExperience({ setLoadProgress, lenisRef }) {
       setLoadProgress(pct);
     };
 
-    for (let i = 1; i <= FRAME_COUNT; i++) {
-      const img = new Image();
-      img.src = `/frames/frame-${String(i).padStart(4, "0")}.webp`;
-      img.decode().then(onReady).catch(onReady);
-      images.push(img);
+    async function loadBatches() {
+      for (let b = 0; b < FRAME_COUNT && !cancelled; b += BATCH) {
+        const batch = [];
+        for (let i = b; i < Math.min(b + BATCH, FRAME_COUNT); i++) {
+          const img = new Image();
+          img.src = `/frames/frame-${String(i + 1).padStart(4, "0")}.webp`;
+          images[i] = img;
+          batch.push(img.decode().then(onReady).catch(onReady));
+        }
+        await Promise.all(batch);
+      }
     }
+
     imagesRef.current = images;
+    loadBatches();
+
+    return () => { cancelled = true; };
   }, [setLoadProgress]);
 
   // ── Canvas + ScrollTrigger ──

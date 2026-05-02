@@ -166,6 +166,28 @@ function DaewooLoadingScreen({ progress }) {
    Hero — gradient-based (wet asphalt aesthetic)
    ───────────────────────────────────────────── */
 
+function LazyVideo({ className, src, ...props }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.src = src;
+          el.load();
+          el.play().catch(() => {});
+          io.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [src]);
+  return <video ref={ref} className={className} preload="none" loop muted playsInline {...props} />;
+}
+
 function DaewooHero() {
   return (
     <section className="hero-section daewoo-hero">
@@ -241,10 +263,12 @@ function DaewooScrollExperience({ setLoadProgress, lenisRef }) {
   const activeFrame = daewooFrames[activeIndex];
   const ActiveIcon = activeFrame.icon;
 
-  // ── Preload frames ──
+  // ── Preload frames in batches ──
   useLayoutEffect(() => {
-    const images = [];
+    const images = new Array(DAEWOO_FRAME_COUNT);
     let loadedCount = 0;
+    let cancelled = false;
+    const BATCH = 8;
 
     const onReady = () => {
       loadedCount++;
@@ -252,13 +276,23 @@ function DaewooScrollExperience({ setLoadProgress, lenisRef }) {
       setLoadProgress(pct);
     };
 
-    for (let i = 1; i <= DAEWOO_FRAME_COUNT; i++) {
-      const img = new Image();
-      img.src = `/daewoo-frames/frame-${String(i).padStart(4, "0")}.webp`;
-      img.decode().then(onReady).catch(onReady);
-      images.push(img);
+    async function loadBatches() {
+      for (let b = 0; b < DAEWOO_FRAME_COUNT && !cancelled; b += BATCH) {
+        const batch = [];
+        for (let i = b; i < Math.min(b + BATCH, DAEWOO_FRAME_COUNT); i++) {
+          const img = new Image();
+          img.src = `/daewoo-frames/frame-${String(i + 1).padStart(4, "0")}.webp`;
+          images[i] = img;
+          batch.push(img.decode().then(onReady).catch(onReady));
+        }
+        await Promise.all(batch);
+      }
     }
+
     imagesRef.current = images;
+    loadBatches();
+
+    return () => { cancelled = true; };
   }, [setLoadProgress]);
 
   // ── Canvas + ScrollTrigger ──
@@ -535,13 +569,9 @@ function DaewooAfterSection() {
   return (
     <section className="after-section daewoo-after">
       <div className="daewoo-end-video-wrap">
-        <video
+        <LazyVideo
           className="daewoo-end-video"
           src="/Nexia_end.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
         />
         <div className="daewoo-end-video-overlay" />
       </div>
