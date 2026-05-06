@@ -71,10 +71,10 @@ export default function VehicleSelector({ onSelect }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          Три мира. Одна страсть к машинам.
+          Четыре мира. Одна страсть к машинам.
         </motion.p>
 
-        <div className="selector-cards selector-cards-3">
+        <div className="selector-cards selector-cards-4">
           {/* Honda Card */}
           <motion.button
             className="selector-card honda-select-card"
@@ -188,6 +188,40 @@ export default function VehicleSelector({ onSelect }) {
               </p>
               <div className="selector-card-cta">
                 <span className="selector-card-btn daewoo-btn-accent">Открыть</span>
+              </div>
+            </div>
+          </motion.button>
+
+          {/* LADA Card — static photo preview */}
+          <motion.button
+            className="selector-card lada-select-card"
+            onClick={() => onSelect("lada")}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.15, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <div className="selector-card-bg lada-card-bg">
+              <img
+                src="/LADA 2107 2003.png"
+                alt="LADA 2107 2003"
+                className="selector-card-video lada-card-photo"
+              />
+              <div className="selector-card-overlay lada-overlay" />
+            </div>
+            <div className="selector-card-content">
+              <span className="selector-card-brand">АвтоВАЗ • 2003</span>
+              <h2 className="selector-card-name">
+                LADA 2107
+                <br />
+                <span className="lada-accent-text">Легенда</span>
+              </h2>
+              <p className="selector-card-desc">
+                1.5L OHV. 72 л.с. Советская классика на века.
+              </p>
+              <div className="selector-card-cta">
+                <span className="selector-card-btn lada-btn-accent">Открыть</span>
               </div>
             </div>
           </motion.button>

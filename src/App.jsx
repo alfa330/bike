@@ -20,6 +20,7 @@ import {
 import VehicleSelector from "./VehicleSelector";
 import NissanApp from "./NissanApp";
 import DaewooApp from "./DaewooApp";
+import LadaApp from "./LadaApp";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -110,6 +111,10 @@ export default function App() {
 
   if (vehicle === "daewoo") {
     return <DaewooApp onBack={handleBack} />;
+  }
+
+  if (vehicle === "lada") {
+    return <LadaApp onBack={handleBack} />;
   }
 
   return <HondaApp onBack={handleBack} />;
